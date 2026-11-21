@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Heeru🤟</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+      #loveBtn {
+        display: block;
+        margin: 30px auto;
+        padding: 14px 32px;
+        font-size: 18px;
+        background: #e6dac8;
+        box-shadow: 0 0 10px #b59f8c;
+        color: #000;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+      .overlay.show { display: flex; }
+      .popup {
+        position: relative;
+        background: #111;
+        color: #fff;
+        padding: 40px 60px;
+        border-radius: 16px;
+        border: 1px solid #b59f8c;
+        box-shadow: 0 0 25px #b59f8c(0, 191, 255, 0.4);
+        text-align: center;
+        min-width: 300px;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+      .lines {
+        min-height: 17rem;
+        text-align: center;
+      }
+      .lines p {
+        display: block;
+        margin: 0;
+        font-size: 1.6rem;
+        line-height: 2.1rem;
+        letter-spacing: 3px;
+        animation: fadeIn 0.3s ease;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(6px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .close {
+        position: absolute;
+        top: 10px;
+        right: 18px;
+        font-size: 28px;
+        cursor: pointer;
+      }
+      #replyBtn {
+        display: none;
+        margin: 20px auto 0;
+        padding: 12px 28px;
+        font-size: 1.1rem;
+        background: #ff4d6d;
+        color: #fff;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        animation: fadeIn 0.4s ease;
+      }
+      #replyBtn:hover { background: #ff2e57; }
+      #replyMsg {
+        margin-top: 16px;
+        font-size: 1.3rem;
+        color: #ff4d6d;
+        animation: fadeIn 0.4s ease;
+      }
+    </style>
+</head>
+<body class="special-page">
+    <Header>
+        <h1>Hello Bestie Ji ❤️</h1>
+        <h2>Heres a special msg for you🎀</h2>
+    </Header>
+    <section>
+        <div class="msg">
+            <p class="pointing"><b>Bestie JI</b></p>
+            <p>I Don't Know What To Say.<br> but i want to tell you how much you are special to me.<br>Genuinely you are one of most special person for me.<br> you have an place in my heart that no one else can replace. <br> i am so much grateful to my life for making you part of it.</p>
+            <p><b>And these aren't just words, they're words i truly mean❤️</b></p>
+        </div>
+    </section>
+
+    <button id="loveBtn">Click Me</button>
+
+    <div class="overlay" id="overlay">
+      <div class="popup">
+        <span class="close" id="closeBtn">&times;</span>
+        <div id="typedText" class="lines"></div>
+        <button id="replyBtn">I Love You Too Addu ❤️</button>
+        <div id="replyMsg"></div>
+      </div>
+    </div>
+
+    <script>
+      const btn = document.getElementById("loveBtn");
+      const overlay = document.getElementById("overlay");
+      const typedText = document.getElementById("typedText");
+      const closeBtn = document.getElementById("closeBtn");
+      const replyBtn = document.getElementById("replyBtn");
+      const replyMsg = document.getElementById("replyMsg");
+
+      const steps = [
+        "I",
+        "I L",
+        "I LO",
+        "I LOV",
+        "I LOVE",
+        "I LOVE Y",
+        "I LOVE YO",
+        "I LOVE YOU",
+        "I LOVE YOU H",
+        "I LOVE YOU He",
+        "I LOVE YOU Hee",
+        "I LOVE YOU Heer",
+        "I LOVE YOU Heeru",
+        "I LOVE YOU Heeru❤️"
+      ];
+
+      let timer;
+
+      function addLine(text) {
+        const p = document.createElement("p");
+        p.textContent = text;
+        typedText.appendChild(p);
+      }
+
+      function typeMessage() {
+        let i = 0;
+        typedText.innerHTML = "";
+        replyMsg.textContent = "";
+        replyBtn.style.display = "none";
+        clearInterval(timer);
+
+        addLine(steps[0]);
+
+        timer = setInterval(() => {
+          i++;
+          if (i >= steps.length) {
+            clearInterval(timer);
+            replyBtn.style.display = "block";   // last line ke baad button dikhao
+            return;
+          }
+          addLine(steps[i]);
+        }, 500);
+      }
+
+      btn.addEventListener("click", () => {
+        overlay.classList.add("show");
+        typeMessage();
+      });
+
+      replyBtn.addEventListener("click", () => {
+        replyMsg.textContent = "Love you too! 🥰";
+        replyBtn.style.display = "none";
+      });
+
+      function closePopup() {
+        overlay.classList.remove("show");
+        clearInterval(timer);
+      }
+
+      closeBtn.addEventListener("click", closePopup);
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) closePopup();
+      });
+    </script>
+</body>
+</html>
